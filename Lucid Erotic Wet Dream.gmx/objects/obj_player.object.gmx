@@ -25,55 +25,128 @@
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Inherit from base
+event_inherited();
+
+//"protected" vars:
+image_speed = .125; 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///private variables
+
+//movement
+minvel = 3;
+stevel = minvel * .5;       //stealthing speed
+maxvel = minvel * 1.75;
+//curvel = 0;       //moved to base
+
+//control
+suspended = false;
+instance_create(0, 0, obj_gui);
+dbox("Welcome to LEWD!#WASD: Make Lainie Walk#Shift: Sprint#Tab: Toggle inventory.#E key: General action button# ... Enjoy your stay!");
+targetX = mouse_x;
+targetY = mouse_y;
+stamBlock = false;  //find out what this does
+type = "";          //very vague
+time = 0;           //very vague
+timer = time;
+cap = 31;           //cap for something; maybe items?
+quipacity = 15;     //is this really a time for puns?
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// Init
 // starting values, can be changed
-minvel=3;
-stevel=minvel*.5;//stealthing speed
-maxvel=minvel*1.75;
-hp=100;
-stam=100;
-stamDec=.5;
-mood=5;
+//Dante: are these "public" variables?
+//minvel = 3;
+//stevel = minvel * .5;       //stealthing speed
+//maxvel = minvel * 1.75;
+hp = 100;
+//stam = 100;
+stamDec = .5;
+mood = 5;
 
 //leave alone//
-suspended=false;
-instance_create(0,0,gui);
-dbox("Welcome to LEWD!#WASD: Make Lainie Walk#Shift: Sprint#Tab: Toggle inventory.#E key: General action button# ... Enjoy your stay!");
-polar=false;
-if(!polar){
-    ori=2;
-    horizontal=0;
-    vertical=0;
+//Dante: Are these "private" variables?
+//suspended = false;
+//instance_create(0, 0, obj_gui);
+//dbox("Welcome to LEWD!#WASD: Make Lainie Walk#Shift: Sprint#Tab: Toggle inventory.#E key: General action button# ... Enjoy your stay!");
+//polar = false;
+if(!polar)      //Dante: The is the Create event. This will always occur
+{
+    ori = 2;            //where do horizontal and vertical originate?
+    horizontal = 0;
+    vertical = 0;
 }
-targetX=mouse_x;
-targetY=mouse_y;
-numDir=8;
-curvel=0;
-stamBlock=false;
-type="";
-act="Idle";
-curAct=act;
-variant=0;//couldn't think of a better name, determines what actions you'll be doing in special situations( i.e. tall grass, water, etc.);
-curVariant=variant;
-image_speed=.125
-quipacity=15
+//targetX = mouse_x;
+//targetY = mouse_y;
+numDir = 8;                 //Dante: Meant to be constant
+//curvel = 0;
+//stamBlock = false;
+//type = "";
+//act = "Idle";
+curAct = act;               //Dante: Why are these two separate variables?
+//variant = 0;                //couldn't think of a better name, determines what actions you'll be doing in special situations( i.e. tall grass, water, etc.);
+curVariant = variant;       //Dante: Why are these two separate variables?
+//image_speed = .125;
+//quipacity = 15;
+
 //Equipment Slots setup
-for(i=quipacity;i&gt;=0;i--){
+for(i = quipacity; i &gt;= 0; i--)
+{
     //0-name,1-description
-    quipSlot[i,0]=-1;
-    quipSlot[i,1]="";
+    quipSlot[i, 0] = -1;
+    quipSlot[i, 1] = "";
 }
+
 //Collectibles Array
-cap=31
-for(i=cap;i&gt;=0;i--){
+//cap = 31;               //definitely rename
+for(i = cap; i &gt;= 0; i--)
+{
     //0-tag,1-quantity,2-value,description
-    itemSlot[i,0]=-1;
-    itemslot[i,1]=0;
-    itemslot[i,2]=0;
-    itemslot[i,3]="";
+    itemSlot[i, 0] = -1;
+    itemslot[i, 1] = 0;
+    itemslot[i, 2] = 0;
+    itemslot[i, 3] = "";
+
 }
-time=0;
-timer=time;
+//time = 0;
+//timer = time;       //Dante: What is timer for?
 
 </string>
           </argument>
@@ -97,95 +170,174 @@ timer=time;
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Inherit Step
+event_inherited();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Behavior/Control
 
-if(curAct!=act){
-    behavior(act);
-    curAct=act;
+//Dante: Why can't they just do this at the call?
+if(curAct != act)
+{
+    scr_behavior(act);      //Dante: This really didn't need to be a separate script
+    curAct = act;
 }
 
 //Controls//
-if(!suspended){
+if(!suspended)
+{
     //attack//
-    if(mouse_check_button_released(mb_left)&amp;&amp;stam&gt;10){
+    if(mouse_check_button_released(mb_left) &amp;&amp; stam &gt; 10)
+    {
         instance_create(x,y,obj_projectile);
-        stam-=10
+        stam -= 10;
     }
     //use suspend(timer) to disable controls temporarily
     //use restore() to disable suspension;
-    if(!polar){
-        if(global.w){
-            vertical=-1;
-        }else if(global.s){
-            vertical=1;
-        }else{
-            vertical=0;
+    
+    //vertical and horizontal are used here, but where do they originate?
+    
+    //direction
+    if(!polar)          //Dante: But the player isn't polar! Can this be an override?
+    {
+        //vertical
+        if(global.w)
+        {
+            vertical = -1;
         }
-        if(global.a){
-            horizontal=-1;
-        }else if(global.d){
-            horizontal=1;
-        }else{
-            horizontal=0;
+        else if(global.s)
+        {
+            vertical = 1;
         }
-        if(global.w||global.a||global.s||global.d){
-            if(global.shift &amp;&amp; !stamBlock){
-                act="Run";
-                stam-=stamDec
-            }else{
-                act="Walk";
+        else
+        {
+            vertical = 0;
+        }
+        
+        //horizontal
+        if(global.a)
+        {
+            horizontal = -1;
+        }
+        else if(global.d)
+        {
+            horizontal = 1;
+        }
+        else
+        {
+            horizontal = 0;
+        }
+        
+        //Dante: can we eliminate this block somehow?
+        //moving at all
+        if(global.w || global.a || global.s || global.d)
+        {
+            if(global.shift &amp;&amp; !stamBlock)
+            {
+                act = "Run";
+                stam -= stamDec;
+            }
+            else
+            {
+                act = "Walk";
             }
                 
-        }else{
-            act="Idle";
         }
-    }else{
-    if(global.lmb){
-        if(global.shift &amp;&amp; !stamBlock){
-            act="Run";
-            stam-=stamDec
-        }else{
-            act="Walk";
+        else
+        {
+            act = "Idle";
         }
-    }else{
-        act="Idle";
+        
     }
-        targetX=mouse_x;targetY=mouse_y;
+    else    //if polar
+    {
+        if(global.lmb)
+        {
+            if(global.shift &amp;&amp; !stamBlock)
+            {
+                act = "Run";
+                stam -= stamDec;
+            }
+            else
+            {
+                act = "Walk";
+            }
+        }
+        else
+        {
+            act = "Idle";
+        }
+        
+        targetX = mouse_x;
+        targetY = mouse_y;
     }
-    mood=floor(hp/33.33);
-    if(hp&lt;=0){
-        hp=0;
+    
+    mood = floor(hp / 33.33);
+    if(hp &lt;= 0)
+    {
+        hp = 0;
     }
 
 
 }
-
-if(suspended){//for timed suspension best used for simple, 1-piece animations.
-    time+=1;
-    if(act=="Escape"){
-        lastImage=image_number;
-        if(image_index&gt;=lastImage-4){
-            image_speed=0;
+else  //if suspended
+{
+    //for timed suspension best used for simple, 1-piece animations.
+    time += 1;
+    if(act == "Escape")
+    {
+        //Dante: Is this a local variable?
+        lastImage = image_number;
+        if(image_index &gt;= lastImage - 4)
+        {
+            image_speed = 0;
         }
     }
-    if(time&gt;=timer){
+    
+    if(time &gt;= timer)
+    {
         resume();
     }
 }
 
 
 //Stamgmt
-    if(stam&lt;100 &amp;&amp; curvel&lt;maxvel){
-        stam+=stamDec
-    }if(stam&lt;0){
-        stamBlock=true;
-    }if(stamBlock &amp;&amp; stam&gt;25){
-        stamBlock=false;
-    }
-    
-if(collision_point(x,y,obj_transfer,false,false)){
-    inst=instance_nearest(x,y,obj_transfer);
-    spawn(inst.destX,inst.destY,inst.destRoom);
+if((stam &lt; 100) &amp;&amp; (curvel &lt; maxvel))
+{
+    stam += stamDec;
+}
+if(stam &lt; 0)
+{
+    stamBlock = true;
+}
+if(stamBlock &amp;&amp; stam &gt; 25)      //Dante: probably doesn't need to check stamBlock
+{
+    stamBlock = false;
+}
+
+//Dante: relocate this to the transfer point events    
+if(collision_point(x, y, obj_transfer, false, false))
+{
+    inst = instance_nearest(x, y, obj_transfer);
+    scr_spawnPlayer(inst.destX, inst.destY, inst.destRoom);
 }
 
 

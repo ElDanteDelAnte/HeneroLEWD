@@ -8,7 +8,47 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="3" enumb="1">
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Instance Vars
+
+//movement
+drawRad = 500;
+targetX = 0;        //protected
+targetY = 0;        //protected
+deltaX = 0;
+deltaY = 0;
+dist = 0;
+theta = 0;
+ori = 0;            //orientation
+curvel = 0;
+act = "Idle";       //action
+curAct = act;       //unsure what the difference is
+polar = false;      //protected
+stam = 100;         //protected
+type = "";          //protected
+variant = 0;        //couldn't think of a better name, determines what actions you'll be doing in special situations( i.e. tall grass, water, etc.);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -29,78 +69,126 @@
 //Motor:
 //targetX=argument[0]; targetY=argument[1];velocity=argument[2];
 
-drawRad=500
-depth=-y;
-deltaX=targetX-x;deltaY=targetY-y;//targetX/Y must be set in child objects
-dist=sqrt(power(deltaX,2)+power(deltaY,2));
-theta=darctan(deltaY/deltaX);
+//drawRad = 500;
+depth = -y;
+//targetX/Y must be set in child objects
+//Dante: are these instance vars?
+deltaX = targetX - x;
+deltaY = targetY - y;     
+dist = sqrt(power(deltaX, 2) + power(deltaY, 2));   //Dante: Dist is accessed elsewhere
+theta = darctan(deltaY / deltaX);
         
-if(deltaX&lt;0){
-    theta+=180
-    }
-if(deltaY&lt;0&amp;&amp;deltaX&gt;0){
-    theta+=360
-    }
+if(deltaX &lt; 0)
+{
+    theta += 180;
+}
 
+if(deltaY &lt; 0 &amp;&amp; deltaX &gt; 0)
+{
+    theta += 360;
+}
+
+//Dante: horizontal and vertical used here, but do they originate here?
 
 //Motor/Direction
-if(visible){
-    if(polar){//all npc's have this. keyboard controls use rect//
+if(visible)
+{
+    if(polar)
+    {
+        //all npc's have this. keyboard controls use rect//
+        //Dante: see if you can divide polar/non-polar systems by type
+        //should be similar to method override
         
-        ori=floor(theta/(360/numDir));//important variable if npc turns into 8-direction;
-        hspeed+=(curvel*dcos(theta)-hspeed)*.3;
-        vspeed+=(curvel*dsin(theta)-vspeed)*.3;
+        ori = floor(theta / (360 / numDir));    //important variable if npc turns into 8-direction;
+        hspeed += (curvel * dcos(theta) - hspeed) * .3;
+        vspeed += (curvel * dsin(theta) - vspeed) * .3;
     }
-    else{
-        hspeed+=(curvel*horizontal-hspeed)*.3;
-        vspeed+=(curvel*vertical-vspeed)*.3;
-        if(vertical==1 &amp;&amp; horizontal==1){
-            ori=1;
-        }else if(vertical==-1 &amp;&amp; horizontal==1){
-            ori=7;
-        }else if(vertical==1 &amp;&amp; horizontal==-1){
-            ori=3;
-        }else if(vertical==-1 &amp;&amp; horizontal==-1){
-            ori=5;
-        }else if(horizontal==1){
-            ori=0;
-        }else if(horizontal==-1){
-            ori=4;
-        }else if(vertical==1){
-            ori=2;
-        }else if(vertical==-1){
-            ori=6;
+    else        //Dante: replace with enum and switch block
+    {
+        hspeed += (curvel * horizontal - hspeed) * .3;
+        vspeed += (curvel * vertical - vspeed) * .3;
+        if(vertical == 1 &amp;&amp; horizontal == 1)
+        {
+            ori = 1;
+        }
+        else if(vertical == -1 &amp;&amp; horizontal == 1)
+        {
+            ori = 7;
+        }
+        else if(vertical == 1 &amp;&amp; horizontal == -1)
+        {
+            ori = 3;
+        }
+        else if(vertical == -1 &amp;&amp; horizontal == -1)
+        {
+            ori = 5;
+        }
+        else if(horizontal == 1)
+        {
+            ori = 0;
+        }
+        else if(horizontal == -1)
+        {
+            ori = 4;
+        }
+        else if(vertical == 1)
+        {
+            ori = 2;
+        }
+        else if(vertical == -1)
+        {
+            ori = 6;
         }
     }
-}//end visible check;
-else{
-    hspeed=0;vspeed=0;
+}
+else    //if invisible
+{
+    hspeed = 0;
+    vspeed = 0;
 }
 
 
+//sprite control
+//Dante: should this be local var?
+spExists = asset_get_index("SP_" + type + act + string(ori + variant * numDir));
 
-spExists=asset_get_index("SP_"+type+act+string(ori+variant*numDir));
-if(spExists&gt;-1){
-    sprite_index=spExists;
-}else{
-    sprite_index=asset_get_index("SP_"+type+act);
+if(spExists &gt; -1)
+{
+    sprite_index = spExists;
 }
+else    //if sprite does not exist
+{
+    sprite_index = asset_get_index("SP_" + type + act);
+}
+
 //Collision
-if(!place_free(x,y+16)){
-    while(!place_free(x,y+16)){
-        y-=.1;
+//Dante: This looks nasty as hell, probably causes some tredmilling
+if(!place_free(x, y + 16))
+{
+    while(!place_free(x, y + 16))
+    {
+        y -= .1;
     }
-}if(!place_free(x,y+8)){
-    while(!place_free(x,y+8)){
-        y+=.1;
+}
+if(!place_free(x, y + 8))
+{
+    while(!place_free(x, y + 8))
+    {
+        y += .1;
     }
-}if(!place_free(x-10,y+12)){
-    while(!place_free(x-10,y+12)){
-        x+=.1;
+}
+if(!place_free(x - 10, y + 12))
+{
+    while(!place_free(x - 10, y + 12))
+    {
+        x += .1;
     }
-}if(!place_free(x+10,y+12)){
-    while(!place_free(x+10,y+12)){
-        x-=.1;
+}
+if(!place_free(x + 10, y + 12))
+{
+    while(!place_free(x + 10, y + 12))
+    {
+        x -= .1;
     }
 }
 

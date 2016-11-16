@@ -166,7 +166,7 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="Behaviors">
-      <script>scripts\behavior.gml</script>
+      <script>scripts\scr_behavior.gml</script>
       <script>scripts\ai.gml</script>
     </scripts>
     <scripts name="GUI">
@@ -177,7 +177,7 @@
       <script>scripts\suspend.gml</script>
       <script>scripts\resume.gml</script>
       <script>scripts\respawn.gml</script>
-      <script>scripts\spawn.gml</script>
+      <script>scripts\scr_spawnPlayer.gml</script>
     </scripts>
     <scripts name="Stat Manipulation">
       <script>scripts\damage.gml</script>
@@ -188,7 +188,7 @@
   </fonts>
   <objects name="objects">
     <objects name="base">
-      <object>objects\gui</object>
+      <object>objects\obj_gui</object>
       <object>objects\obj_char</object>
       <object>objects\obj_splash</object>
       <object>objects\obj_projectile</object>

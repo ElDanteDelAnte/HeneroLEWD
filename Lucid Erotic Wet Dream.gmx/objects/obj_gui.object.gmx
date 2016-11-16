@@ -207,27 +207,34 @@ if(curDboxo!=dboxOffset){
           <argument>
             <kind>1</kind>
             <string>///GUI'D RAW!!!
-var guiPink=make_colour_rgb(227,128,155);
-var guiBlue=make_colour_rgb(94,138,198);
-var barx=130;var barlength=155;
-var bary1=statOffset+30;
-var bary2=statOffset+60;
+var guiPink = make_colour_rgb(227, 128, 155);
+var guiBlue = make_colour_rgb(94, 138, 198);
+var barx = 130;
+var barlength = 155;
+var bary1 = statOffset + 30;
+var bary2 = statOffset + 60;
 
 //Menu draw//
 
-draw_background(menu_gui,0,menuOffset);
-/*for(i=0;i&lt;8;i++){
-    if(i&lt;4){
-        slotx=quipx+(tilewidth*i);
-        sloty=quipy;
-    }else{
-        slotx=quipx+(tilewidth*(i-4));
-        sloty=quipy+tilewidth;
+draw_background(menu_gui, 0, menuOffset);
+
+/*for(i=0;i&lt;8;i++)
+{
+    if(i&lt;4)
+    {
+        slotx = quipx + (tilewidth * i);
+        sloty = quipy;
+    }
+    else
+    {
+        slotx = quipx + (tilewidth * (i - 4));
+        sloty = quipy + tilewidth;
     }
     
-        draw_sprite(SP_skill_slot,0,slotx+spacer,sloty+spacer);
-    if(player.quipSlot[i,0]&gt;=-1){
-        draw_sprite(SP_skill,i,slotx+spacer,sloty+spacer);
+        draw_sprite(SP_skill_slot, 0, slotx + spacer, sloty + spacer);
+    if(player.quipSlot[i, 0] &gt;= -1)
+    {
+        draw_sprite(SP_skill, i, slotx + s pacer, sloty + spacer);
     }
     
 }*/
@@ -235,29 +242,29 @@ draw_background(menu_gui,0,menuOffset);
 //Dbox draw//
 
 draw_set_color(guiPink);
-draw_background(dBox_gui,0,dboxOffset);
-draw_text(10,dboxOffset+10,"V-Key: Hide/Show");
-draw_text(20,dboxOffset+40,dTxt);
+draw_background(dBox_gui, 0, dboxOffset);
+draw_text(10, dboxOffset + 10, "V-Key: Hide/Show");
+draw_text(20, dboxOffset + 40, dTxt);
 
 //statbar draw//
 
 draw_set_color(c_white);
-draw_rectangle(barx,bary1,room_width,room_height,false);
+draw_rectangle(barx,bary1, room_width, room_height, false);
 draw_set_color(guiPink);
-draw_rectangle(barx,bary1,barx+barlength*(player.hp*.01),bary1+28,false);
+draw_rectangle(barx, bary1, barx+barlength * (player.hp * .01), bary1 + 28, false);
 draw_set_color(guiBlue);
-draw_rectangle(barx,bary2,barx+barlength*(player.stam*.01),bary2+28,false);
-draw_background(frontPlate,0,statOffset);
+draw_rectangle(barx, bary2, barx + barlength * (player.stam * .01), bary2 + 28, false);
+draw_background(frontPlate, 0, statOffset);
 
 //Lainie draw//
 
-draw_sprite(SP_mood,player.mood,10,statOffset+10);
+draw_sprite(SP_mood, player.mood, 10, statOffset + 10);
 
 //Debug draw//
 
 /*draw_set_color(c_black);
-draw_text(20,20,"debug v1.69");
-draw_text(20,40,text);
+draw_text(20, 20, "debug v1.69");
+draw_text(20, 40, text);
 </string>
           </argument>
         </arguments>
