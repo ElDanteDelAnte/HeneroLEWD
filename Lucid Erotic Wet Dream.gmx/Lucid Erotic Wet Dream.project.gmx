@@ -182,6 +182,11 @@
     <scripts name="Stat Manipulation">
       <script>scripts\damage.gml</script>
     </scripts>
+    <script>scripts\scr_action_idle.gml</script>
+    <script>scripts\scr_action_walk.gml</script>
+    <script>scripts\scr_orient_4.gml</script>
+    <script>scripts\scr_orient_8.gml</script>
+    <script>scripts\scr_action_run.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>

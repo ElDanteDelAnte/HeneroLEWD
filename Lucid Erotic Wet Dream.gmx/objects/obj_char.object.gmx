@@ -37,12 +37,44 @@ dist = 0;
 theta = 0;
 ori = 0;            //orientation
 curvel = 0;
-act = "Idle";       //action
+act = scr_action_idle;       //action
 curAct = act;       //unsure what the difference is
 polar = false;      //protected
 stam = 100;         //protected
 type = "";          //protected
 variant = 0;        //couldn't think of a better name, determines what actions you'll be doing in special situations( i.e. tall grass, water, etc.);
+findOrient = scr_orient_4;     //script for determining orientation
+walkVel = 0;        //walking speed
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Orientation Enumerators
+enum dir4
+{
+    RIGHT, DOWN, LEFT, UP
+};
+
+enum dir8
+{
+    RC, RD, CD, LD, LC, LU, CU, RU
+};
 </string>
           </argument>
         </arguments>
@@ -73,8 +105,8 @@ variant = 0;        //couldn't think of a better name, determines what actions y
 depth = -y;
 //targetX/Y must be set in child objects
 //Dante: are these instance vars?
-deltaX = targetX - x;
-deltaY = targetY - y;     
+var deltaX = targetX - x;
+var deltaY = targetY - y;     
 dist = sqrt(power(deltaX, 2) + power(deltaY, 2));   //Dante: Dist is accessed elsewhere
 theta = darctan(deltaY / deltaX);
         
@@ -88,12 +120,21 @@ if(deltaY &lt; 0 &amp;&amp; deltaX &gt; 0)
     theta += 360;
 }
 
+//change orient if moving
+//if (!(targetX == x &amp;&amp; targetY == y))
+//    ori = script_execute(findOrient);
+
 //Dante: horizontal and vertical used here, but do they originate here?
 
 //Motor/Direction
 if(visible)
 {
-    if(polar)
+    //ori = findOrient();
+    //hspeed += (curvel * dcos(theta) - hspeed) * .3;
+    //vspeed += (curvel * dsin(theta) - vspeed) * .3;
+    
+    
+    /*if(polar)
     {
         //all npc's have this. keyboard controls use rect//
         //Dante: see if you can divide polar/non-polar systems by type
@@ -107,39 +148,48 @@ if(visible)
     {
         hspeed += (curvel * horizontal - hspeed) * .3;
         vspeed += (curvel * vertical - vspeed) * .3;
+        
+        //ori8.RD
         if(vertical == 1 &amp;&amp; horizontal == 1)
         {
             ori = 1;
         }
+        //ori8.RU
         else if(vertical == -1 &amp;&amp; horizontal == 1)
         {
             ori = 7;
         }
+        //ori8.LD
         else if(vertical == 1 &amp;&amp; horizontal == -1)
         {
             ori = 3;
         }
+        //ori8.LU
         else if(vertical == -1 &amp;&amp; horizontal == -1)
         {
             ori = 5;
         }
+        //ori8.RC
         else if(horizontal == 1)
         {
             ori = 0;
         }
+        //ori8.LC
         else if(horizontal == -1)
         {
             ori = 4;
         }
+        //ori8.CD
         else if(vertical == 1)
         {
             ori = 2;
         }
+        //ori8.CU
         else if(vertical == -1)
         {
             ori = 6;
         }
-    }
+    }*/
 }
 else    //if invisible
 {
@@ -150,7 +200,8 @@ else    //if invisible
 
 //sprite control
 //Dante: should this be local var?
-spExists = asset_get_index("SP_" + type + act + string(ori + variant * numDir));
+/*
+var spExists = asset_get_index("SP_" + type + act + string(ori + variant * numDir));
 
 if(spExists &gt; -1)
 {
@@ -159,7 +210,7 @@ if(spExists &gt; -1)
 else    //if sprite does not exist
 {
     sprite_index = asset_get_index("SP_" + type + act);
-}
+}*/
 
 //Collision
 //Dante: This looks nasty as hell, probably causes some tredmilling
@@ -193,6 +244,35 @@ if(!place_free(x + 10, y + 12))
 }
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Perform Action
+//Dante: This is so sprites only change once
+/*
+if(curAct != act)
+{
+    curAct = act;
+    curAct();
+}*/
+script_execute(act);
 </string>
           </argument>
         </arguments>

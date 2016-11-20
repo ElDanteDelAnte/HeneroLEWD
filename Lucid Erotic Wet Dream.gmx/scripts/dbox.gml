@@ -1,7 +1,7 @@
 txt=argument[0];
-if(gui.diaTgl < 0)
+if(obj_gui.diaTgl < 0)
 {
-    gui.diaTgl *= -1;
+    obj_gui.diaTgl *= -1;
 }
-gui.dTxt = txt;
+obj_gui.dTxt = txt;
 

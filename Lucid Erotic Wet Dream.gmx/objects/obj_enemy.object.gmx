@@ -61,13 +61,104 @@ position = 1;           //corresponds to sex anim number, will be randomized, la
 target = obj_player;    //Dante: is this necessary?
 //targetX = obj_player.x;
 //targetY = obj_player.y;
-numDir = 4;             //Dante: Different from Player, very interesting
+//numDir = 4;             //Dante: Different from Player, very interesting
 //variant = 0;
-polar = true;           //protected
+//polar = true;           //protected
 //stam = 100;           
 lust = 0;               //private
 sextimer = 0;           //private?
 //no HP?
+findOrient = scr_orient_4;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Implements Idle Action
+imgSpeed_idle = 0.5;                //temp value
+
+//idle sprite
+sprIdle[0] = SP_chirillaIdle0;         
+sprIdle[1] = SP_chirillaIdle0;
+sprIdle[2] = SP_chirillaIdle1;
+sprIdle[3] = SP_chirillaIdle1;
+//sprIdle[4] = SP_chirillaIdle2;
+//sprIdle[5] = SP_chirillaIdle2;
+//sprIdle[6] = SP_chirillaIdle3;
+//sprIdle[7] = SP_chirillaIdle3;
+
+//in grass (temp)
+sprIdleGrass[0] = SP_chirillaIdle0;    
+sprIdleGrass[1] = SP_chirillaIdle0;
+sprIdleGrass[2] = SP_chirillaIdle1;
+sprIdleGrass[3] = SP_chirillaIdle1;
+//sprIdleGrass[4] = SP_chirillaIdle2;
+//sprIdleGrass[5] = SP_chirillaIdle2;
+//sprIdleGrass[6] = SP_chirillaIdle3;
+//sprIdleGrass[7] = SP_chirillaIdle3;
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Implements Walk Action
+imgSpeed_walk = 0.5;                //temp value
+walkVel = 5;
+
+//walk sprite (temp)
+sprWalk[0] = SP_chirillaWalk0;
+sprWalk[1] = SP_chirillaWalk0;
+sprWalk[2] = SP_chirillaWalk1;
+sprWalk[3] = SP_chirillaWalk1;
+//sprWalk[4] = SP_chirillaWalk2;
+//sprWalk[5] = SP_chirillaWalk2;
+//sprWalk[6] = SP_chirillaWalk3;
+//sprWalk[7] = SP_chirillaWalk3;
+
+//in grass (temp)      
+sprWalkGrass[0] = SP_chirillaWalk0;
+sprWalkGrass[1] = SP_chirillaWalk0;
+sprWalkGrass[2] = SP_chirillaWalk1;
+sprWalkGrass[3] = SP_chirillaWalk1;
+//sprWalkGrass[4] = SP_chirillaWalk2;
+//sprWalkGrass[5] = SP_chirillaWalk2;
+//sprWalkGrass[6] = SP_chirillaWalk3;
+//sprWalkGrass[7] = SP_chirillaWalk3;    
+
+
 </string>
           </argument>
         </arguments>
@@ -92,6 +183,12 @@ sextimer = 0;           //private?
             <kind>1</kind>
             <string>///Inherit Step
 event_inherited();
+
+if (!(targetX == x &amp;&amp; targetY == y))
+    ori = script_execute(findOrient);
+
+hspeed += (curvel * dcos(theta) - hspeed) * .3;
+vspeed += (curvel * dsin(theta) - vspeed) * .3;
 </string>
           </argument>
         </arguments>
@@ -115,28 +212,33 @@ event_inherited();
             <string>/// Behavior
 targetX = global.playerX;   //replace with obj_player.x/.y?
 targetY = global.playerY;
+targetX = obj_player.x;
+targetY = obj_player.y;
 
 //Dante: Work on eliminating this
-if(curAct != act)
+/*if(curAct != act)
 {
     curAct = act;
     ai(act);        //Dante: investigate script further
-}
+}*/
 
 //Dante: I'm inferring that 256 is the chase range
 if(dist &gt; 256)
 {
-    act = "Idle";
+    act = scr_action_idle;
 }
+//Dante: Replace with collide event?
 else if(dist &lt; 256 &amp;&amp; dist &gt; reach)
 {
     //Dante: If suspened means paused, try to make this more universal
     if(!obj_player.suspended)
     {
-        act = "Walk";
+        //curvel = 5;
+        act = scr_action_walk;
     }
     
 }
+//Dante: Replace with collide event?
 else if(dist &lt; reach &amp;&amp; act != "Sexfinish" + string(position))
 {
     act = "Sexloop" + string(position);     //replace with var indicating number of scenes and randomize
@@ -180,7 +282,7 @@ if(act == "Sexloop" + string(position))
             stam -= 1;
             lust += 2;
             obj_player.hp -= 1;
-            gui.text = string(act);
+            obj_gui.text = string(act);
         }
         if(keyboard_check_released(ord('E')))
         {
