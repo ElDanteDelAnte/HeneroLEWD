@@ -137,6 +137,7 @@ else    //if sprite does not exist
     sprite_index = asset_get_index("SP_" + type + act);
 }*/
 
+/*
 //Collision
 //Dante: This looks nasty as hell, probably causes some tredmilling
 if(!place_free(x, y + 16))
@@ -167,7 +168,7 @@ if(!place_free(x + 10, y + 12))
         x -= .1;
     }
 }
-
+*/
 
 </string>
           </argument>

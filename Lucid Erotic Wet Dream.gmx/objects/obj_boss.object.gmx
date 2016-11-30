@@ -101,16 +101,17 @@ else if(dist&lt;reach &amp;&amp; act!="Sexfinish"+string(position)){
 
 if(act=="Sexloop"+string(position)){
     //escape Attempt//
-    suspend(-1);
+    scr_suspend(-1);
     sextimer+=1;
     if(sextimer&lt;30 &amp;&amp; global.e){    //Dante: note so stam requirement
         if(obj_player.act!="Escape"){
             obj_player.act="Escape";
             obj_player.visible=true;
-            suspend(45);
+            scr_suspend(45);
             //no stamina penalty?
         }
         
+        //Dante: Probably want to remove this, since inheritance
         with(instance_nearest(x,y,obj_base_enemy)){
             instance_destroy();
         }
@@ -137,10 +138,10 @@ if(act=="Sexloop"+string(position)){
         if(obj_player.act!="Escape"){
             obj_player.act="Escape";
             obj_player.visible=true;
-            suspend(45);
+            scr_suspend(45);
         }
         
-        with(instance_nearest(x,y,obj_enemy)){
+        with(instance_nearest(x,y,obj_base_enemy)){
             instance_destroy();
         }
     }

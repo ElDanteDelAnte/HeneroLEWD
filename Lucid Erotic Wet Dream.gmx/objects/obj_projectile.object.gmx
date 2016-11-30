@@ -64,7 +64,8 @@ vspeed=vel*dsin(theta);
         instance_destroy();
     }
     
-}/*
+}
+/*
 if(collision_rectangle(x,y,x+37, y+15,obj_boss,false,true)){
     damageInst=instance_nearest(x,y,obj_boss);
     damage(damageInst,vel*.8,theta);

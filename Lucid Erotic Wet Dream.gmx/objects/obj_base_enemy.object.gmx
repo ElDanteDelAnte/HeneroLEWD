@@ -67,6 +67,30 @@ sextimer = 0;               //eliminate later, probably
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Implements Encounter
+sprEncounter = 0;
+imgSpeed_encounter = 1;
+atk = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -87,155 +111,6 @@ sextimer = 0;               //eliminate later, probably
             <kind>1</kind>
             <string>///Inherit Char Step
 event_inherited();
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Behavior
-//targetX = global.playerX;   //replace with obj_player.x/.y?
-//targetY = global.playerY;
-target = obj_player;
-targetX = obj_player.x;
-targetY = obj_player.y;
-
-//Dante: Work on eliminating this
-/*if(curAct != act)
-{
-    curAct = act;
-    ai(act);        //Dante: investigate script further
-}*/
-
-//Dante: I'm inferring that 256 is the chase range
-if(dist &gt; 256)
-{
-    act = scr_action_idle;
-}
-//Dante: Replace with collide event?
-else if(dist &lt; 256 &amp;&amp; dist &gt; reach)
-{
-    //Dante: If suspened means paused, try to make this more universal
-    if(!obj_player.suspended)
-    {
-        //curvel = 5;
-        act = scr_action_walk;
-    }
-    
-}
-//Dante: Replace with collide event
-else if(dist &lt; reach &amp;&amp; act != "Sexfinish" + string(position))
-{
-    act = "Sexloop" + string(position);     //replace with var indicating number of scenes and randomize
-    
-}
-//Dante: As is, runs over
-
-//Dante: figure out what these blocks are and deconstruct
-//Also, see if these can't be deconstructed as scripts
-if(act == "Sexloop" + string(position))
-{
-    //escape Attempt//
-    
-    suspend(-1);
-    sextimer += 1;      //Dante: find origin
-    if(sextimer &lt; 30 &amp;&amp; global.e &amp;&amp; obj_player.stam &gt; 25)
-    {
-        if(obj_player.act != "Escape")
-        {
-            global.struggle = false;
-            obj_player.act = "Escape";
-            obj_player.visible = true;
-            suspend(45);
-            obj_player.stam -= 25;
-        }
-        
-        //Dante: Seems familiar, probably copypasta
-        with(instance_nearest(x, y, obj_base_enemy))
-        {
-            instance_destroy();
-        }
-        
-    }
-    //Dante: nothing at 30
-    if (sextimer &gt; 30)        //escape fail
-    {
-        //must reach 100 lust to cum w/o losing stam
-        var midframe = image_number / 2;
-            //code runs each thrust
-        if(image_index == midframe)
-        {
-            stam -= 1;
-            lust += 2;
-            obj_player.hp -= 1;
-            obj_gui.text = string(act);
-        }
-        if(keyboard_check_released(ord('E')))
-        {
-            stam -= 2;
-            target.stam -= 2;
-        }
-        
-    }
-    if(stam &lt; 0)    //stun
-    {
-        if(obj_player.act != "Escape")
-        {
-            obj_player.act = "Escape";
-            obj_player.visible = true;
-            suspend(45);
-            global.struggle = false;        //Dante: note the globals
-        }
-        
-        //Dante: Close attention here
-        //is "with" just to declare the scope for instance_destroy()?
-        with(instance_nearest(x, y, obj_base_enemy))
-        {
-            instance_destroy();
-        }
-    }
-    if(lust &gt;= 100)   //cum
-    {
-        act = "Sexfinish" + string(position);
-    }
-}
-else if(act == "Sexfinish" + string(position))
-{
-    //100 lust reached, add creampie stat and play for a few secs
-
-    if(!obj_player.suspended)
-    {
-        //Dante: copypasta
-        obj_player.visible = true;
-        with(instance_nearest(x, y, obj_base_enemy))
-        {
-            instance_destroy();
-        }
-    }
-}
-
-if(stam &lt; 0)        //stun
-{
-        //Dante: Copypasta
-        with(instance_nearest(x, y, obj_base_enemy))
-        {
-            instance_destroy();
-        }
-    }
 </string>
           </argument>
         </arguments>
@@ -289,6 +164,222 @@ else    //if invisible
 {
     hspeed = 0;
     vspeed = 0;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Determine Action
+if (!(global.struggle || obj_player.suspend &gt; 0))   //neither struggling nor suspended
+{
+    if (dist &lt; 256)     //"range" not set variable yet
+        act = scr_action_walk;
+    else
+        act = scr_action_idle;
+}
+//else, continue (e.g. encounter)
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Behavior
+//targetX = global.playerX;   //replace with obj_player.x/.y?
+//targetY = global.playerY;
+target = obj_player;
+targetX = obj_player.x;
+targetY = obj_player.y;
+
+//Dante: Work on eliminating this
+/*if(curAct != act)
+{
+    curAct = act;
+    ai(act);        //Dante: investigate script further
+}*/
+
+//Dante: I'm inferring that 256 is the chase range
+/*
+if(dist &gt; 256)
+{
+    act = scr_action_idle;
+}
+//Dante: Replace with collide event?
+else if(dist &lt; 256 &amp;&amp; dist &gt; reach)
+{
+    //Dante: If suspened means paused, try to make this more universal
+    if(!obj_player.suspended)
+    {
+        //curvel = 5;
+        act = scr_action_walk;
+    }
+    
+}
+//Dante: Replace with collide event
+else if(dist &lt; reach &amp;&amp; act != "Sexfinish" + string(position))
+{
+    act = "Sexloop" + string(position);     //replace with var indicating number of scenes and randomize
+    
+}*/
+//Dante: As is, runs over
+
+//Dante: figure out what these blocks are and deconstruct
+//Also, see if these can't be deconstructed as scripts
+if(act == "Sexloop" + string(position))
+{
+    //escape Attempt//
+    
+    scr_suspend(-1);
+    sextimer += 1;
+    if(sextimer &lt; 30 &amp;&amp; global.e &amp;&amp; obj_player.stam &gt; 25)
+    {
+        //Dante: successful escape?
+        if(obj_player.act != "Escape")
+        {
+            global.struggle = false;
+            obj_player.act = "Escape";
+            obj_player.visible = true;
+            scr_suspend(45);
+            obj_player.stam -= 25;
+        }
+        
+        //Dante: Seems familiar, probably copypasta
+        with(instance_nearest(x, y, obj_base_enemy))
+        {
+            instance_destroy();
+        }
+        
+    }
+    //Dante: nothing at 30
+    if (sextimer &gt; 30)        //escape fail
+    {
+        //must reach 100 lust to cum w/o losing stam
+        var midframe = image_number / 2;
+            //code runs each thrust
+        if(image_index == midframe)
+        {
+            stam -= 1;
+            lust += 2;
+            obj_player.hp -= 1;
+            obj_gui.text = "sexloop";
+        }
+        if(keyboard_check_released(ord('E')))
+        {
+            stam -= 2;
+            target.stam -= 2;
+        }
+        
+    }
+    if(stam &lt; 0)    //stun
+    {
+        if(obj_player.act != "Escape")
+        {
+            obj_player.act = "Escape";
+            obj_player.visible = true;
+            scr_suspend(45);
+            global.struggle = false;        //Dante: note the globals
+        }
+        
+        //Dante: Close attention here
+        //is "with" just to declare the scope for instance_destroy()?
+        with(instance_nearest(x, y, obj_base_enemy))
+        {
+            instance_destroy();
+        }
+    }
+    if(lust &gt;= 100)   //cum
+    {
+        act = "Sexfinish" + string(position);
+    }
+}
+else if(act == "Sexfinish" + string(position))
+{
+    //100 lust reached, add creampie stat and play for a few secs
+
+    if(!obj_player.suspended)
+    {
+        //Dante: copypasta
+        obj_player.visible = true;
+        with(instance_nearest(x, y, obj_base_enemy))
+        {
+            instance_destroy();
+        }
+    }
+}
+
+//Dante: There was already a stun, why is this here?
+if(stam &lt; 0)        //stun
+{
+        //Dante: Copypasta
+        with(instance_nearest(x, y, obj_base_enemy))
+        {
+            instance_destroy();
+        }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_player">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Begin Encounter
+if (!global.struggle)
+{
+    global.struggle = true;
+    
+    if (sprite_index != sprEncounter)
+        sprite_index = sprEncounter;        //TODO: make enemy property
+        
+    image_speed = imgSpeed_encounter;       //TODO: make enemy property
+    other.visible = false;
+    sextimer = 30;
+    act = scr_action_encounter;
 }
 </string>
           </argument>
