@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Inherit Create Event
+            <string>///Inherit From base Enemy
 event_inherited();
 </string>
           </argument>
@@ -47,24 +47,15 @@ event_inherited();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Init
-//you can change
-type="tt";
-reach=64; //distance in pixels before enemy can reach player
-position=1;//corresponds to sex anim number, will be randomized, later
+            <string>///Instance Variabes
 
-//leave alone
+type="tt";      //character (protected, may eliminate)
+reach=64;       //enemy (protected, may eliminate)
+position=1;     //enemy (protected, may change later)
 
-act="Idle";
-curAct=act;
-curvel=0;
-target=obj_player;targetX=obj_player.x;targetY=obj_player.y;
-numDir=1;
-variant=0;
-polar=true;
-stam=100;
-lust=0;
-sextimer=0;
+stam=100;       //character (protected, may change later)
+lust=0;         //enemy (protected, may change later)
+sextimer=0;     //enemy (protected, may change later)
 </string>
           </argument>
         </arguments>
@@ -112,18 +103,20 @@ if(act=="Sexloop"+string(position)){
     //escape Attempt//
     suspend(-1);
     sextimer+=1;
-    if(sextimer&lt;30 &amp;&amp; global.e){
+    if(sextimer&lt;30 &amp;&amp; global.e){    //Dante: note so stam requirement
         if(obj_player.act!="Escape"){
             obj_player.act="Escape";
             obj_player.visible=true;
             suspend(45);
+            //no stamina penalty?
         }
         
-        with(instance_nearest(x,y,obj_enemy)){
+        with(instance_nearest(x,y,obj_base_enemy)){
             instance_destroy();
         }
         
     }
+    //Dante: nothing at 30
     if (sextimer&gt;30){//escape fail
         //must reach 100 lust to cum w/o losing stam
         var midframe=image_number/2;
@@ -160,7 +153,7 @@ else if(act=="Sexfinish"+string(position)){
     
     if(!obj_player.suspended){
         obj_player.visible=true;
-        with(instance_nearest(x,y,obj_enemy)){
+        with(instance_nearest(x,y,obj_base_enemy)){
             instance_destroy();
         }
     }

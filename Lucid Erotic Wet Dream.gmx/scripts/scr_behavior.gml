@@ -1,4 +1,5 @@
 ///Dante: Try to convert to "override"
+/*
 action = argument[0];
 switch(action)
 {
@@ -23,4 +24,4 @@ switch(action)
         image_index = 1;
         suspend(90);
         break;
-}
+}*/

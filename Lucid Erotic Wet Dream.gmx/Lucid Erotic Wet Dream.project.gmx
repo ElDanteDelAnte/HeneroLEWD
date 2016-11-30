@@ -187,6 +187,7 @@
     <script>scripts\scr_orient_4.gml</script>
     <script>scripts\scr_orient_8.gml</script>
     <script>scripts\scr_action_run.gml</script>
+    <script>scripts\scr_movement.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
@@ -197,10 +198,11 @@
       <object>objects\obj_char</object>
       <object>objects\obj_splash</object>
       <object>objects\obj_projectile</object>
+      <object>objects\obj_base_enemy</object>
     </objects>
     <objects name="chars">
       <object>objects\obj_player</object>
-      <object>objects\obj_enemy</object>
+      <object>objects\obj_charilla</object>
       <object>objects\obj_boss</object>
     </objects>
     <objects name="tools">

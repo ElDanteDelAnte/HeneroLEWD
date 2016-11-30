@@ -130,7 +130,7 @@ quipacity = 15;     //is this really a time for puns?
 //act = "Idle";
 //curAct = act;               //Dante: Why are these two separate variables?
 //variant = 0;                //couldn't think of a better name, determines what actions you'll be doing in special situations( i.e. tall grass, water, etc.);
-curVariant = variant;       //Dante: Why are these two separate variables?
+//curVariant = variant;       //Dante: Why are these two separate variables?
 //image_speed = .125;
 //quipacity = 15;
 
@@ -180,24 +180,35 @@ for(i = cap; i &gt;= 0; i--)
 imgSpeed_idle = 0.125;
 
 //idle sprite
-sprIdle[0] = SP_Idle0;         
-sprIdle[1] = SP_Idle1;
-sprIdle[2] = SP_Idle2;
-sprIdle[3] = SP_Idle3;
-sprIdle[4] = SP_Idle4;
-sprIdle[5] = SP_Idle5;
-sprIdle[6] = SP_Idle6;
-sprIdle[7] = SP_Idle7;
+sprIdle[Terrain.OPEN, dir8.RC] = SP_Idle0;         
+sprIdle[Terrain.OPEN, dir8.RD] = SP_Idle1;
+sprIdle[Terrain.OPEN, dir8.CD] = SP_Idle2;
+sprIdle[Terrain.OPEN, dir8.LD] = SP_Idle3;
+sprIdle[Terrain.OPEN, dir8.LC] = SP_Idle4;
+sprIdle[Terrain.OPEN, dir8.LU] = SP_Idle5;
+sprIdle[Terrain.OPEN, dir8.CU] = SP_Idle6;
+sprIdle[Terrain.OPEN, dir8.RU] = SP_Idle7;
 
 //in grass
-sprIdleGrass[0] = SP_Idle8;    
-sprIdleGrass[1] = SP_Idle9;
-sprIdleGrass[2] = SP_Idle10;
-sprIdleGrass[3] = SP_Idle11;
-sprIdleGrass[4] = SP_Idle12;
-sprIdleGrass[5] = SP_Idle13;
-sprIdleGrass[6] = SP_Idle14;
-sprIdleGrass[7] = SP_Idle15;
+sprIdle[Terrain.GRASS, dir8.RC] = SP_Idle8;    
+sprIdle[Terrain.GRASS, dir8.RD] = SP_Idle9;
+sprIdle[Terrain.GRASS, dir8.CD] = SP_Idle10;
+sprIdle[Terrain.GRASS, dir8.LD] = SP_Idle11;
+sprIdle[Terrain.GRASS, dir8.LC] = SP_Idle12;
+sprIdle[Terrain.GRASS, dir8.LU] = SP_Idle13;
+sprIdle[Terrain.GRASS, dir8.CU] = SP_Idle14;
+sprIdle[Terrain.GRASS, dir8.RU] = SP_Idle15;
+
+//in water (temp)
+sprIdle[Terrain.WATER, dir8.RC] = SP_Idle8;    
+sprIdle[Terrain.WATER, dir8.RD] = SP_Idle9;
+sprIdle[Terrain.WATER, dir8.CD] = SP_Idle10;
+sprIdle[Terrain.WATER, dir8.LD] = SP_Idle11;
+sprIdle[Terrain.WATER, dir8.LC] = SP_Idle12;
+sprIdle[Terrain.WATER, dir8.LU] = SP_Idle13;
+sprIdle[Terrain.WATER, dir8.CU] = SP_Idle14;
+sprIdle[Terrain.WATER, dir8.RU] = SP_Idle15;
+
 </string>
           </argument>
         </arguments>
@@ -222,25 +233,35 @@ sprIdleGrass[7] = SP_Idle15;
 imgSpeed_walk = 0.5;
 walkVel = minvel;
 
-//walk sprite (temp)
-sprWalk[0] = SP_Walk0;          
-sprWalk[1] = SP_Walk1;
-sprWalk[2] = SP_Walk2;
-sprWalk[3] = SP_Walk3;
-sprWalk[4] = SP_Walk4;
-sprWalk[5] = SP_Walk5;
-sprWalk[6] = SP_Walk6;
-sprWalk[7] = SP_Walk7;
+//open area walk sprite
+sprWalk[Terrain.OPEN, dir8.RC] = SP_Walk0;          
+sprWalk[Terrain.OPEN, dir8.RD] = SP_Walk1;
+sprWalk[Terrain.OPEN, dir8.CD] = SP_Walk2;
+sprWalk[Terrain.OPEN, dir8.LD] = SP_Walk3;
+sprWalk[Terrain.OPEN, dir8.LC] = SP_Walk4;
+sprWalk[Terrain.OPEN, dir8.LU] = SP_Walk5;
+sprWalk[Terrain.OPEN, dir8.CU] = SP_Walk6;
+sprWalk[Terrain.OPEN, dir8.RU] = SP_Walk7;
 
-//in grass (temp)
-sprWalkGrass[0] = SP_Walk8;        
-sprWalkGrass[1] = SP_Walk9;
-sprWalkGrass[2] = SP_Walk10;
-sprWalkGrass[3] = SP_Walk11;
-sprWalkGrass[4] = SP_Walk12;
-sprWalkGrass[5] = SP_Walk13;
-sprWalkGrass[6] = SP_Walk14;
-sprWalkGrass[7] = SP_Walk15;
+//in grass
+sprWalk[Terrain.GRASS, dir8.RC] = SP_Walk8;        
+sprWalk[Terrain.GRASS, dir8.RD] = SP_Walk9;
+sprWalk[Terrain.GRASS, dir8.CD] = SP_Walk10;
+sprWalk[Terrain.GRASS, dir8.LD] = SP_Walk11;
+sprWalk[Terrain.GRASS, dir8.LC] = SP_Walk12;
+sprWalk[Terrain.GRASS, dir8.LU] = SP_Walk13;
+sprWalk[Terrain.GRASS, dir8.CU] = SP_Walk14;
+sprWalk[Terrain.GRASS, dir8.RU] = SP_Walk15;
+
+//in water (temp)
+sprWalk[Terrain.WATER, dir8.RC] = SP_Walk8;        
+sprWalk[Terrain.WATER, dir8.RD] = SP_Walk9;
+sprWalk[Terrain.WATER, dir8.CD] = SP_Walk10;
+sprWalk[Terrain.WATER, dir8.LD] = SP_Walk11;
+sprWalk[Terrain.WATER, dir8.LC] = SP_Walk12;
+sprWalk[Terrain.WATER, dir8.LU] = SP_Walk13;
+sprWalk[Terrain.WATER, dir8.CU] = SP_Walk14;
+sprWalk[Terrain.WATER, dir8.RU] = SP_Walk15;
 </string>
           </argument>
         </arguments>
@@ -266,24 +287,34 @@ imgSpeed_run = 0.5;
 runVel = maxvel;
 
 //run sprite
-sprRun[0] = SP_Run0;   
-sprRun[1] = SP_Run1;
-sprRun[2] = SP_Run2;
-sprRun[3] = SP_Run3;
-sprRun[4] = SP_Run4;
-sprRun[5] = SP_Run5;
-sprRun[6] = SP_Run6;
-sprRun[7] = SP_Run7;
+sprRun[Terrain.OPEN, dir8.RC] = SP_Run0;   
+sprRun[Terrain.OPEN, dir8.RD] = SP_Run1;
+sprRun[Terrain.OPEN, dir8.CD] = SP_Run2;
+sprRun[Terrain.OPEN, dir8.LD] = SP_Run3;
+sprRun[Terrain.OPEN, dir8.LC] = SP_Run4;
+sprRun[Terrain.OPEN, dir8.LU] = SP_Run5;
+sprRun[Terrain.OPEN, dir8.CU] = SP_Run6;
+sprRun[Terrain.OPEN, dir8.RU] = SP_Run7;
 
 //in grass    
-sprRunGrass[0] = SP_Run8;  
-sprRunGrass[1] = SP_Run9;
-sprRunGrass[2] = SP_Run10;
-sprRunGrass[3] = SP_Run11;
-sprRunGrass[4] = SP_Run12;
-sprRunGrass[5] = SP_Run13;
-sprRunGrass[6] = SP_Run14;
-sprRunGrass[7] = SP_Run15;
+sprRun[Terrain.GRASS, dir8.RC] = SP_Run8;  
+sprRun[Terrain.GRASS, dir8.RD] = SP_Run9;
+sprRun[Terrain.GRASS, dir8.CD] = SP_Run10;
+sprRun[Terrain.GRASS, dir8.LD] = SP_Run11;
+sprRun[Terrain.GRASS, dir8.LC] = SP_Run12;
+sprRun[Terrain.GRASS, dir8.LU] = SP_Run13;
+sprRun[Terrain.GRASS, dir8.CU] = SP_Run14;
+sprRun[Terrain.GRASS, dir8.RU] = SP_Run15;
+
+//in water (temp)
+sprRun[Terrain.WATER, dir8.RC] = SP_Run8;  
+sprRun[Terrain.WATER, dir8.RD] = SP_Run9;
+sprRun[Terrain.WATER, dir8.CD] = SP_Run10;
+sprRun[Terrain.WATER, dir8.LD] = SP_Run11;
+sprRun[Terrain.WATER, dir8.LC] = SP_Run12;
+sprRun[Terrain.WATER, dir8.LU] = SP_Run13;
+sprRun[Terrain.WATER, dir8.CU] = SP_Run14;
+sprRun[Terrain.WATER, dir8.RU] = SP_Run15;
 </string>
           </argument>
         </arguments>
@@ -400,8 +431,8 @@ else    //suspended
             <string>///Move In Direction
 event_inherited();
 
-if (!(horizontal == 0 &amp;&amp; vertical == 0))
-    ori = script_execute(findOrient);
+//if (!(horizontal == 0 &amp;&amp; vertical == 0))
+//    ori = script_execute(findOrient);
 
 hspeed += (curvel * horizontal - hspeed) * .3;
 vspeed += (curvel * vertical - vspeed) * .3;

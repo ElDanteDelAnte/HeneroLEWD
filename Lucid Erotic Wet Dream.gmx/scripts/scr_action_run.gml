@@ -2,8 +2,9 @@
 image_speed = imgSpeed_run;
 curvel = runVel;
 
-//if grass, sprRunGrass[ori]
-//else
-    //only change sprite once
-    if (sprite_index != sprRun[ori])
-        sprite_index = sprRun[ori];
+//set terr, ori
+scr_movement();
+    
+//only change sprite once
+if (sprite_index != sprRun[terr, ori])
+    sprite_index = sprRun[terr, ori];

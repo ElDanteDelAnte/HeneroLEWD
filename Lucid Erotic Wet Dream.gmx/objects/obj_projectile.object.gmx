@@ -57,14 +57,14 @@ vspeed=vel*dsin(theta);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(collision_rectangle(x,y,x+37, y+15,obj_enemy,false,true)){
-    damageInst=instance_nearest(x,y,obj_enemy);
+            <string>if(collision_rectangle(x,y,x+37, y+15,obj_base_enemy,false,true)){
+    damageInst=instance_nearest(x,y,obj_base_enemy);
     damage(damageInst,vel*.8,theta);
     with(instance_nearest(x,y,obj_projectile)){
         instance_destroy();
     }
     
-}
+}/*
 if(collision_rectangle(x,y,x+37, y+15,obj_boss,false,true)){
     damageInst=instance_nearest(x,y,obj_boss);
     damage(damageInst,vel*.8,theta);
@@ -72,7 +72,7 @@ if(collision_rectangle(x,y,x+37, y+15,obj_boss,false,true)){
         instance_destroy();
     }
     
-}
+}*/
 
 
 
