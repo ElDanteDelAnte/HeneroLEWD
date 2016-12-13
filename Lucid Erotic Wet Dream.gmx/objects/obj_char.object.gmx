@@ -29,15 +29,15 @@
 
 //movement
 drawRad = 500;
-curvel = 0;                 //protected
-act = scr_action_idle;      //action
-//curAct = act;         //depreciated
-//polar = false;        //depreciated
-stam = 100;             //protected
-type = "";              //protected
-//variant = 0;          //depreciated 
+curvel = 0;                     //protected
+act = scr_action_idle;          //action
+//curAct = act;                 //depreciated
+//polar = false;                //depreciated
+stam = 100;                     //protected
+type = "";                      //protected
+//variant = 0;                  //depreciated 
 findOrient = scr_orient_4;     //script for determining orientation
-walkVel = 0;            //walking speed, (chars implement walk)
+walkVel = 0;                    //walking speed, (chars implement walk)
 </string>
           </argument>
         </arguments>

@@ -186,7 +186,7 @@ else    //if invisible
           <argument>
             <kind>1</kind>
             <string>///Determine Action
-if (!(global.struggle || obj_player.suspend &gt; 0))   //neither struggling nor suspended
+if (!(global.struggle || obj_player.suspend &gt; 0))   //only move if player neither struggling nor suspended
 {
     if (dist &lt; 256)     //"range" not set variable yet
         act = scr_action_walk;
