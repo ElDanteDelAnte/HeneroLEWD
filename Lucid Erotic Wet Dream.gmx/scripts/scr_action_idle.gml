@@ -4,10 +4,8 @@ curvel = 0;
 
 //no movement
 
-//if in grass, sprIdleGrass[ori]
-//else,
-    //only sets sprite index once
-    if (sprite_index != sprIdle[terr, ori])
-        sprite_index = sprIdle[terr, ori];
+//only sets sprite index once, and only once momentum slows
+if (sprite_index != sprIdle[terr, ori] && abs(hspeed) < 0.01 && abs(vspeed)< 0.01)
+    sprite_index = sprIdle[terr, ori];
 
 
