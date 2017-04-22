@@ -27,8 +27,27 @@
             <kind>1</kind>
             <string>///Inherit from base
 event_inherited();
-
-//"protected" vars:
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///"protected" vars:
 image_speed = .125; 
 </string>
           </argument>
@@ -65,7 +84,6 @@ maxvel = minvel * 1.75;
 findOrient = scr_orient_8;
 
 //control
-//suspended = false;
 suspend = 0;
 instance_create(0, 0, obj_gui);
 dbox("Welcome to LEWD!#WASD: Make Lainie Walk#Shift: Sprint#Tab: Toggle inventory.#E key: General action button# ... Enjoy your stay!");
@@ -73,8 +91,6 @@ targetX = mouse_x;
 targetY = mouse_y;
 stamBlock = false;  //find out what this does
 type = "";          //very vague
-//time = 0;           //very vague
-//timer = time;
 cap = 31;           //cap for something; maybe items?
 quipacity = 15;     //is this really a time for puns?
 </string>
@@ -456,10 +472,34 @@ vspeed += (curvel * vertical - vspeed) * .3;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Behavior/Control
-
-
-//Controls//
+            <string>///Makeshift Collision (and spawn?)
+//Dante: relocate this to the transfer point events    
+if(collision_point(x, y, obj_transfer, false, false))
+{
+    inst = instance_nearest(x, y, obj_transfer);
+    scr_spawnPlayer(inst.destX, inst.destY, inst.destRoom);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///When Not Suspended
 if(suspend &lt;= 0 &amp;&amp; !global.struggle)
 {
     //attack//
@@ -469,60 +509,40 @@ if(suspend &lt;= 0 &amp;&amp; !global.struggle)
         stam -= 10;
     }
     
-    
-    mood = floor(hp / 33.33);
+    mood = floor(hp / 33.33);           //remove this eventually
+    //"death"
     if(hp &lt;= 0)
     {
         hp = 0;
     }
-
-
 }
-/*
-else //suspended
-{
-    //for timed suspension best used for simple, 1-piece animations.
-    time += 1;
-    if(act == "Escape")
-    {
-        //Dante: Is this a local variable?
-        var lastImage = image_number;
-        if(image_index &gt;= lastImage - 4)
-        {
-            image_speed = 0;
-        }
-    }
-    
-    if(time &gt;= timer)
-    {
-        resume();
-    }
-}*/
-
-
-//Stamgmt
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Stamina Regen
 if((stam &lt; 100) &amp;&amp; (curvel &lt; maxvel) &amp;&amp; !global.struggle)
-{
     stam += stamDec;
-}
 if(stam &lt; 0)
-{
     stamBlock = true;
-}
-if(stam &gt; 25)      //Dante: probably doesn't need to check stamBlock
-{
+if(stam &gt; 25)
     stamBlock = false;
-}
-
-//Dante: relocate this to the transfer point events    
-if(collision_point(x, y, obj_transfer, false, false))
-{
-    inst = instance_nearest(x, y, obj_transfer);
-    scr_spawnPlayer(inst.destX, inst.destY, inst.destRoom);
-}
-
-
-
 
 </string>
           </argument>
@@ -570,6 +590,31 @@ event_inherited();
             <string>///Suspend Timer
 if (--suspend &lt; 0)
     suspend = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_base_enemy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///hide self
+visible = false;
+global.struggle = true;
 </string>
           </argument>
         </arguments>

@@ -20,11 +20,12 @@ else    //sextimer <= 0, escape fail
 {
     //must reach 100 lust to cum w/o losing stam
     var midframe = image_number / 2;
-        //code runs each thrust
+    
+    //code runs each thrust
     if(image_index == midframe)
     {
         stam -= 1;          //enemy
-        lust += 2 ;         //enemy
+        lust += 2;          //enemy
         
         if (obj_player.stam < 1)
             obj_player.hp -= 1;
@@ -38,8 +39,6 @@ else    //sextimer <= 0, escape fail
         stam -= 2;
         obj_player.stam -= 2;
     }
-    
-    
 }
 if(stam < 0)    //stun
 {

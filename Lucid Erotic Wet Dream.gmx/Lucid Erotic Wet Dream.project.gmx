@@ -182,15 +182,23 @@
     <scripts name="Stat Manipulation">
       <script>scripts\damage.gml</script>
     </scripts>
-    <script>scripts\scr_action_idle.gml</script>
-    <script>scripts\scr_action_walk.gml</script>
     <script>scripts\scr_orient_4.gml</script>
     <script>scripts\scr_orient_8.gml</script>
-    <script>scripts\scr_action_run.gml</script>
     <script>scripts\scr_movement.gml</script>
-    <script>scripts\scr_action_encounter.gml</script>
-    <script>scripts\scr_action_escape.gml</script>
-    <script>scripts\scr_action_sexfinish.gml</script>
+    <scripts name="encounters">
+      <script>scripts\scr_action_encounter.gml</script>
+      <script>scripts\scr_action_sexfinish.gml</script>
+      <script>scripts\scr_action_escape.gml</script>
+      <script>scripts\scr_enct_end.gml</script>
+    </scripts>
+    <scripts name="actions">
+      <script>scripts\scr_action_idle.gml</script>
+      <script>scripts\scr_action_run.gml</script>
+      <script>scripts\scr_action_walk.gml</script>
+      <script>scripts\scr_change_sprite.gml</script>
+      <script>scripts\scr_action_stun.gml</script>
+    </scripts>
+    <script>scripts\scr_enct_damStam.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
@@ -198,12 +206,12 @@
   <objects name="objects">
     <objects name="base">
       <object>objects\obj_gui</object>
-      <object>objects\obj_char</object>
       <object>objects\obj_splash</object>
       <object>objects\obj_projectile</object>
-      <object>objects\obj_base_enemy</object>
     </objects>
     <objects name="chars">
+      <object>objects\obj_char</object>
+      <object>objects\obj_base_enemy</object>
       <object>objects\obj_player</object>
       <object>objects\obj_chirilla</object>
       <object>objects\obj_boss</object>
@@ -219,6 +227,9 @@
     </objects>
     <objects name="collectibles">
       <object>objects\obj_collectible</object>
+    </objects>
+    <objects name="Encounters">
+      <object>objects\obj_base_encounter</object>
     </objects>
   </objects>
   <rooms name="rooms">

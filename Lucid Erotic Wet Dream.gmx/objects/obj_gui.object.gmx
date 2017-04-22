@@ -29,13 +29,7 @@
 tabTgl=1;
 diaTgl=-1;
 global.tgTgl="";
-global.w=false;
-global.a=false;
-global.s=false;
-global.d=false;
-global.e=false;
 global.playerX=obj_player.x; global.playerY=obj_player.y;
-global.struggle=false;
 global.respawnX=1000; global.respawnY=1700;
 text="";
 
@@ -45,6 +39,61 @@ player=obj_player;
 statOffset=380;curStatuo=statOffset;
 menuOffset=640;curMenuo=menuOffset;
 dboxOffset=640;curDboxo=dboxOffset;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Keys
+global.w=false;
+global.a=false;
+global.s=false;
+global.d=false;
+global.e=false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Encounters
+var maxGroupSize = 10;      //Assumption
+
+global.struggle = false;
+global.enctSize = 0;
+
+//init array
+for (var i = 0; i &lt; maxGroupSize; i++)
+    global.enctGroup[0] = 0;
 </string>
           </argument>
         </arguments>
