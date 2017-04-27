@@ -210,7 +210,7 @@
       <object>objects\obj_projectile</object>
     </objects>
     <objects name="chars">
-      <object>objects\obj_char</object>
+      <object>objects\obj_base_char</object>
       <object>objects\obj_base_enemy</object>
       <object>objects\obj_player</object>
       <object>objects\obj_chirilla</object>
