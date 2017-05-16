@@ -47,28 +47,6 @@ event_inherited();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///"protected" vars:
-image_speed = .125; 
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///private variables
 
 //stats
@@ -84,94 +62,13 @@ maxvel = minvel * 1.75;
 findOrient = scr_orient_8;
 
 //control
-suspend = 0;
+suspend = -1;
 instance_create(0, 0, obj_gui);
 dbox("Welcome to LEWD!#WASD: Make Lainie Walk#Shift: Sprint#Tab: Toggle inventory.#E key: General action button# ... Enjoy your stay!");
 targetX = mouse_x;
 targetY = mouse_y;
-stamBlock = false;  //find out what this does
+stamBlock = false;
 type = "";          //very vague
-cap = 31;           //cap for something; maybe items?
-quipacity = 15;     //is this really a time for puns?
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Init
-// starting values, can be changed
-//Dante: are these "public" variables?
-//minvel = 3;
-//stevel = minvel * .5;       //stealthing speed
-//maxvel = minvel * 1.75;
-//hp = 100;
-//stam = 100;
-//stamDec = .5;
-//mood = 5;
-
-//leave alone//
-//Dante: Are these "private" variables?
-//suspended = false;
-//instance_create(0, 0, obj_gui);
-//dbox("Welcome to LEWD!#WASD: Make Lainie Walk#Shift: Sprint#Tab: Toggle inventory.#E key: General action button# ... Enjoy your stay!");
-//polar = false;
-
-/*if(!polar)      //Dante: The is the Create event. This will always occur
-{
-    ori = 2;            //where do horizontal and vertical originate?
-    horizontal = 0;
-    vertical = 0;
-}*/
-
-//targetX = mouse_x;
-//targetY = mouse_y;
-//numDir = 8;                 //Dante: Meant to be constant
-//curvel = 0;
-//stamBlock = false;
-//type = "";
-//act = "Idle";
-//curAct = act;               //Dante: Why are these two separate variables?
-//variant = 0;                //couldn't think of a better name, determines what actions you'll be doing in special situations( i.e. tall grass, water, etc.);
-//curVariant = variant;       //Dante: Why are these two separate variables?
-//image_speed = .125;
-//quipacity = 15;
-
-//Equipment Slots setup
-for(i = quipacity; i &gt;= 0; i--)
-{
-    //0-name,1-description
-    quipSlot[i, 0] = -1;
-    quipSlot[i, 1] = "";
-}
-
-//Collectibles Array
-//cap = 31;               //definitely rename
-for(i = cap; i &gt;= 0; i--)
-{
-    //0-tag,1-quantity,2-value,description
-    itemSlot[i, 0] = -1;
-    itemslot[i, 1] = 0;
-    itemslot[i, 2] = 0;
-    itemslot[i, 3] = "";
-
-}
-//time = 0;
-//timer = time;       //Dante: What is timer for?
 
 </string>
           </argument>
@@ -336,6 +233,50 @@ sprRun[Terrain.WATER, dir8.RU] = SP_Run15;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Inventory
+// starting values, can be changed
+cap = 31;           //cap for something; maybe items?
+quipacity = 15;     //is this really a time for puns?
+
+//Equipment Slots setup
+for(i = quipacity; i &gt;= 0; i--)
+{
+    //0-name,1-description
+    quipSlot[i, 0] = -1;
+    quipSlot[i, 1] = "";
+}
+
+//Collectibles Array
+for(i = cap; i &gt;= 0; i--)
+{
+    //0-tag,1-quantity,2-value,description
+    itemSlot[i, 0] = -1;
+    itemslot[i, 1] = 0;
+    itemslot[i, 2] = 0;
+    itemslot[i, 3] = "";
+}
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -397,7 +338,7 @@ else
             <kind>1</kind>
             <string>///Determine Action
 
-if (!global.struggle)
+if (!global.struggle &amp;&amp; suspend &lt; 0)
 {
     if (horizontal == 0 &amp;&amp; vertical == 0)
         act = scr_action_idle;
@@ -407,6 +348,7 @@ if (!global.struggle)
         act = scr_action_walk;
 }
 /*else    //suspended or struggling
+
 {
     //for timed suspension best used for simple, 1-piece animations.
     time += 1;
@@ -450,8 +392,13 @@ if (!global.struggle)
 //if (!(horizontal == 0 &amp;&amp; vertical == 0))
 //    ori = script_execute(findOrient);
 
-hspeed += (curvel * horizontal - hspeed) * .3;
-vspeed += (curvel * vertical - vspeed) * .3;
+if (global.struggle || suspend &gt; 0)
+    curvel = hspeed = vspeed = 0;
+else
+{
+    hspeed += (curvel * horizontal - hspeed) * .3;
+    vspeed += (curvel * vertical - vspeed) * .3;
+}
 </string>
           </argument>
         </arguments>
@@ -472,7 +419,7 @@ vspeed += (curvel * vertical - vspeed) * .3;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Makeshift Collision (and spawn?)
+            <string>///Makeshift Transfer Point (restructure)
 //Dante: relocate this to the transfer point events    
 if(collision_point(x, y, obj_transfer, false, false))
 {
@@ -499,8 +446,8 @@ if(collision_point(x, y, obj_transfer, false, false))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///When Not Suspended
-if(suspend &lt;= 0 &amp;&amp; !global.struggle)
+            <string>///When Not Suspended (restructure)
+if(suspend &lt; 0 &amp;&amp; !global.struggle)
 {
     //attack//
     if(mouse_check_button_released(mb_left) &amp;&amp; stam &gt; 10)
@@ -587,9 +534,11 @@ event_inherited();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Suspend Timer
+            <string>///Suspend Timer (obsolite)
+/*
 if (--suspend &lt; 0)
     suspend = 0;
+*/
 </string>
           </argument>
         </arguments>
@@ -612,9 +561,13 @@ if (--suspend &lt; 0)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///hide self
-visible = false;
-global.struggle = true;
+            <string>///hide self (obsolite)
+/*
+if (other.stunTimer &lt; 0 &amp;&amp; other.visible)
+{
+    visible = false;
+    global.struggle = true;
+}*/
 </string>
           </argument>
         </arguments>

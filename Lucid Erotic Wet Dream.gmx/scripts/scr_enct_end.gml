@@ -10,7 +10,6 @@ for (var i = 0; i < global.enctSize; i++)
 
 //return player
 obj_player.visible = true;
-obj_player.act = scr_action_idle;
 
 //globals
 global.enctSize = 0;

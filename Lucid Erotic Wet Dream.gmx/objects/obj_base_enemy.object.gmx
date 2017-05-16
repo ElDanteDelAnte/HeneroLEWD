@@ -47,37 +47,10 @@ event_inherited();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Implements Encounter
-enctSolo = obj_base_encounter;
-
-//old way
-sprEncounter = 0;
-imgSpeed_encounter = 1;
-atk = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Protected Variables
 //polar movement
-targetX = 0;                
-targetY = 0;                
+targetX = x;                
+targetY = y;                
 deltaX = 0;                 //private
 deltaY = 0;                 //private
 dist = 0;
@@ -111,9 +84,36 @@ sextimer = 0;               //eliminate later, probably
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Implements Encounter
+enctSolo = obj_base_encounter;
+
+//old way
+sprEncounter = 0;
+imgSpeed_encounter = 1;
+atk = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Implements Stun
-stunTimer = 0;
-stunDuration = 0;
+stunTimer = -1;
+stunDuration = 100;
 
 sprStun = SP_itemGet;
 imgSpeed_stun = 1.0;
@@ -139,91 +139,37 @@ imgSpeed_stun = 1.0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Inherit Char Step
-event_inherited();
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Polar Movement
-var deltaX = targetX - x;
-var deltaY = targetY - y;     
-dist = sqrt(power(deltaX, 2) + power(deltaY, 2));   //Dante: Dist is accessed elsewhere(?)
-theta = darctan(deltaY / deltaX);                   //Dante: Theta used in scr_orient_4
-        
-if(deltaX &lt; 0)
-{
-    theta += 180;
-}
-
-if(deltaY &lt; 0 &amp;&amp; deltaX &gt; 0)
-{
-    theta += 360;
-}
-
-//change orient if moving
-//if (!(targetX == x &amp;&amp; targetY == y))
-//    ori = script_execute(findOrient);
-
-//Dante: horizontal and vertical used here, but do they originate here?
-
-//Motor/Direction
-if(visible)
-{
-    hspeed += (curvel * dcos(theta) - hspeed) * .3;
-    vspeed += (curvel * dsin(theta) - vspeed) * .3;
-    
-}
-else    //if invisible
-{
-    hspeed = 0;
-    vspeed = 0;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Determine Action
-if (!(global.struggle || obj_player.suspend &gt; 0))
+if (scr_isActive())
 {
-    if (dist &lt; 256 &amp;&amp; stunTimer &lt; 0)     //"range" not set variable yet
+    if (scr_seesPlayer())     //"range" not set variable yet
         act = scr_action_walk;
     else
         act = scr_action_idle;
 }
 //else, continue (e.g. encounter)
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Inherit Char Step
+event_inherited();
 </string>
           </argument>
         </arguments>
@@ -382,6 +328,60 @@ if(stam &lt; 0)        //stun
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Polar Movement
+var deltaX = targetX - x;
+var deltaY = targetY - y;     
+dist = sqrt(power(deltaX, 2) + power(deltaY, 2));   //Dante: Dist is accessed elsewhere(?)
+theta = darctan(deltaY / deltaX);                   //Dante: Theta used in scr_orient_4
+        
+if(deltaX &lt; 0)
+{
+    theta += 180;
+}
+
+if(deltaY &lt; 0 &amp;&amp; deltaX &gt; 0)
+{
+    theta += 360;
+}
+
+//change orient if moving
+//if (!(targetX == x &amp;&amp; targetY == y))
+//    ori = script_execute(findOrient);
+
+//Dante: horizontal and vertical used here, but do they originate here?
+
+//Motor/Direction
+if(visible)
+{
+    hspeed += (curvel * dcos(theta) - hspeed) * .3;
+    vspeed += (curvel * dsin(theta) - vspeed) * .3;
+    
+}
+else    //if invisible
+{
+    hspeed = 0;
+    vspeed = 0;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="4" ename="obj_base_encounter">
       <action>
@@ -400,9 +400,9 @@ if(stam &lt; 0)        //stun
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Join Encounter
-global.enctGroup[global.enctSize++] = self;   //add to group list
-visible = false;
+            <string>///Join Encounter 
+if (scr_isActive() &amp;&amp; scr_seesPlayer())
+    scr_enct_join();
 </string>
           </argument>
         </arguments>
@@ -426,12 +426,14 @@ visible = false;
           <argument>
             <kind>1</kind>
             <string>///Begin Encounter
-global.enctGroup[global.enctSize++] = self;   //add to group list
-visible = false;
-instance_create(other.x, other.y, enctSolo);
-
+if (scr_isActive() &amp;&amp; scr_seesPlayer())
+{
+    scr_enct_join();
+    instance_create(other.x, other.y, enctSolo);
+}
 
 //old way
+/*
 if (!global.struggle)
 {
     global.struggle = true;
@@ -444,6 +446,54 @@ if (!global.struggle)
     sextimer = 30;
     act = scr_action_encounter;
 }
+*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///TEST EVENT; delete when done
+draw_self();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Stamina bar
+draw_healthbar(x - 50, y + 30, x + 50, y + 25, stam, c_black, c_red, c_green, 0, true, true);
+draw_text(x, y + 5, string(stam));
 </string>
           </argument>
         </arguments>

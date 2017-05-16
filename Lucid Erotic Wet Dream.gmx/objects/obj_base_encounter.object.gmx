@@ -167,8 +167,10 @@ animVersion = irandom(0);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///End Encounter
+            <string>///End Encounter (Bad End)
+obj_player.act = scr_action_idle;
 scr_enct_end();
+instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -309,9 +311,11 @@ for (var i = 0; i &lt; global.enctSize; i++)
 //success
 if (escapeTimer &gt; 0 &amp;&amp; obj_player.stam &gt; atk)
 {
+    obj_player.suspend = 20;
     obj_player.act = scr_action_escape;
     obj_player.stam -= atk;
     scr_enct_end();
+    instance_destroy();
 }
 else        //failure
 {

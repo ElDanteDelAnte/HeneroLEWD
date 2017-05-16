@@ -1,19 +1,15 @@
 ///Called when the player stops a rape
-visible = true;
-//moved suspend down
-
-
 //change sprite animation
-scr_change_sprite(SP_Escape, 0.5);
 
-/*if (image_index >= image_number - 4)
-    image_speed = 0;
-else
-    image_speed = 0.5;*/
+var frame = 0.5;
+if (sprite_index == SP_Escape && image_index == image_number - 1)
+    frame = 0;
+scr_change_sprite(SP_Escape, frame);
 
+//hang on last frame
 if (image_index == image_number - 1)
-{
-    suspend = 45;   //think this goes here?
+    image_speed = 0;
+
+//end of animation
+if (--suspend < 0)
     act = scr_action_idle;
-    global.struggle = false;
-}

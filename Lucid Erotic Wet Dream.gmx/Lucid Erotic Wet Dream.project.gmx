@@ -187,18 +187,21 @@
     <script>scripts\scr_movement.gml</script>
     <scripts name="encounters">
       <script>scripts\scr_action_encounter.gml</script>
+      <script>scripts\scr_enct_join.gml</script>
       <script>scripts\scr_action_sexfinish.gml</script>
       <script>scripts\scr_action_escape.gml</script>
       <script>scripts\scr_enct_end.gml</script>
+      <script>scripts\scr_enct_damStam.gml</script>
     </scripts>
     <scripts name="actions">
       <script>scripts\scr_action_idle.gml</script>
       <script>scripts\scr_action_run.gml</script>
       <script>scripts\scr_action_walk.gml</script>
-      <script>scripts\scr_change_sprite.gml</script>
       <script>scripts\scr_action_stun.gml</script>
+      <script>scripts\scr_change_sprite.gml</script>
     </scripts>
-    <script>scripts\scr_enct_damStam.gml</script>
+    <script>scripts\scr_isActive.gml</script>
+    <script>scripts\scr_seesPlayer.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
@@ -230,6 +233,7 @@
     </objects>
     <objects name="Encounters">
       <object>objects\obj_base_encounter</object>
+      <object>objects\obj_enct_chir_solo</object>
     </objects>
   </objects>
   <rooms name="rooms">
